@@ -98,7 +98,10 @@ public static class UpdateHandlers
             "/start" => Start(botClient, message),
             "/valuation" => Valuation(botClient, message),
             "/trx" => ConvertCoinTRX(botClient, message),
+            "trx" => ConvertCoinTRX(botClient, message),
+            "兑换" => ConvertCoinTRX(botClient, message),
             "/trx_price" => PriceTRX(botClient, message),
+            "汇率" => PriceTRX(botClient, message),
             "绑定波场地址" => BindAddress(botClient, message),
             "解绑波场地址" => UnBindAddress(botClient, message),
             "查询余额" => QueryAccount(botClient, message),
@@ -229,7 +232,7 @@ USDT： <b>{USDT}</b>
             }
             var ReciveAddress = addressArray[UserId % addressArray.Length];
             var msg = @$"<b>请向此地址转入任意金额，机器人自动回款TRX</b>
-机器人收款地址： <code>{ReciveAddress}</code>
+收款地址(点击复制)： <code>{ReciveAddress}</code>
 
 手续费说明：手续费用于支付转账所消耗的资源，及机器人运行成本。
 当前手续费：<b>兑换金额的 1% 或 1 USDT，取大者</b>
@@ -248,7 +251,7 @@ USDT： <b>{USDT}</b>
             if(USDTFeeRate == 0)
             {
                 msg = @$"<b>请向此地址转入任意金额，机器人自动回款TRX</b>
-机器人收款地址： <code>{ReciveAddress}</code>
+收款地址(点击复制)： <code>{ReciveAddress}</code>
 
 示例：
 <code>转入金额：<b>10 USDT</b>
@@ -289,7 +292,7 @@ USDT： <b>{USDT}</b>
 1000 USDT = {(5m * 200).USDT_To_TRX(rate, FeeRate, USDTFeeRate):0.00} TRX
 </code>
 
-机器人收款地址： <code>{ReciveAddress}</code>
+收款地址(点击复制)： <code>{ReciveAddress}</code>
 
 注意：<b>暂时只支持{MinUSDT} USDT以上(不含{MinUSDT} USDT)的金额兑换，若转入{MinUSDT} USDT及以下金额，将无法退还！！！</b>
 
